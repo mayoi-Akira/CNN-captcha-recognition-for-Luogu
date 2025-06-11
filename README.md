@@ -3,11 +3,12 @@
 ## 介绍
 自动识别并填写洛谷提交时的验证码
 
-深度学习课程作业任务
+简单的深度学习课程作业任务
 
 最终测试集准确率在83%左右
 
-(买不起服务器所以只好部署在本地了)
+~~(买不起服务器所以只好部署在本地了)~~
+感谢 [同学](https://github.com/Hanserneko) 的支援,已经在服务器部署了
 
 ## 数据集
 数据集全部来自https://github.com/langningchen/luoguCaptcha/tree/main/data
