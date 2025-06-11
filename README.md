@@ -24,33 +24,20 @@
 - (2) 展平 + 全连接
 - (3) 四路输出头
   
-Input: (B, 3, 35, 90)
 
-  └─ Conv(3→32, 3×3, pad1) → ReLU → MaxPool(2×2)
 
-       → (B, 32, 17, 45)
+| 层      | 类型                        | 输出                 | 参数量                     |
+| ------- | --------------------------- | -------------------- | -------------------------- |
+| conv1   | Conv2d(3→32, k=3, p=1)      | (B, 32, 35, 90)      | 3×32×3×3 + 32 = 896        |
+| pool1   | MaxPool2d(2×2)              | (B, 32, 17, 45)      | 0                          |
+| conv2   | Conv2d(32→64, k=3, p=1)     | (B, 64, 17, 45)      | 32×64×3×3 + 64 = 18,496    |
+| pool2   | MaxPool2d(2×2)              | (B, 64, 8, 22)       | 0                          |
+| conv3   | Conv2d(64→128, k=3, p=1)    | (B, 128, 8, 22)      | 64×128×3×3 + 128 = 73,856  |
+| pool3   | MaxPool2d(2×2)              | (B, 128, 4, 11)      | 0                          |
+| flatten | —                           | (B, 5632)            | 0                          |
+| fc      | Linear(5632→512)            | (B, 512)             | 5632×512 + 512 = 2,883,968 |
+| head0–3 | Linear(512→NUM\_CLASSES) ×4 | (B, NUM\_CLASSES) ×4 | 4 × (512×C + C)            |
 
-  └─ Conv(32→64, 3×3, pad1) → ReLU → MaxPool(2×2)
-
-       → (B, 64, 8, 22)
-
-  └─ Conv(64→128,3×3, pad1) → ReLU → MaxPool(2×2)
-
-       → (B,128,4,11)
-
-  └─ Flatten → (B, 128×4×11=5632)
-
-  └─ FC(5632→512) → ReLU
-  
-  └─> head0 (512→NUM_CLASSES) → out0
-
-     └─> head1 (512→NUM_CLASSES) → out1
-
-     └─> head2 (512→NUM_CLASSES) → out2
-
-     └─> head3 (512→NUM_CLASSES) → out3
-
-Return: (out0, out1, out2, out3)
 
 
 ## 4. Loss and Accuracy
