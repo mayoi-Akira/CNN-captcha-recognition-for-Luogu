@@ -1,7 +1,7 @@
 # CNN-captcha-recognition-for-Luogu
 
-## 1.介绍
-自动识别填写洛谷提交时的验证码
+## 介绍
+自动识别并填写洛谷提交时的验证码
 
 深度学习课程作业任务
 
@@ -9,20 +9,18 @@
 
 (买不起服务器所以只好部署在本地了)
 
-## 2.数据集
+## 数据集
 数据集全部来自https://github.com/langningchen/luoguCaptcha/tree/main/data
 
 非常感谢大佬的数据集，当我在一片茫茫大海中到处寻找数据集的时候，他仓库的出现仿佛黑暗中的一道光
 
-如果想用这个脚本的话还是使用这位大佬的更好，我的只是应付作业来的（
-
-## 3.网络结构
+## 网络结构
 
 非常经典的卷积池化三层结构
 
-- (1) 三层卷积 + 池化
-- (2) 展平 + 全连接
-- (3) 四路输出头
+  1. 三层卷积 + 池化
+  2. 展平 + 全连接
+  3. 四路输出头
   
 
 
@@ -40,8 +38,13 @@
 
 
 
-## 4. Loss and Accuracy
+## Loss and Accuracy
 
 ![alt text](plt/loss.png)
-
 ![alt text](plt/acc.png)
+
+## 使用
+
+1. 将user.js安装到 [TamperMonkey](https://www.tampermonkey.net/) 
+2. 在本地运行 [app.py](./app.py)。什么？服务器？以后再说...
+3. 现在打开洛谷如果提交时弹出验证码就会自动填充了
