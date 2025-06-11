@@ -2,17 +2,22 @@
 
 ## 1.介绍
 自动识别填写洛谷提交时的验证码
+
 深度学习课程作业任务
+
 最终测试集准确率在83%左右
+
 (买不起服务器所以只好部署在本地了)
 
 ## 2.数据集
-数据集全部来自
-https://github.com/langningchen/luoguCaptcha/tree/main/data
+数据集全部来自https://github.com/langningchen/luoguCaptcha/tree/main/data
+
 非常感谢大佬的数据集，在我在一片茫茫大海中到处寻找数据集的时候，他仓库的出现仿佛黑暗中的一道光
-如果真想用这个脚本的话还是使用这位大佬的更好
-我的只是应付作业来的（
+
+如果真想用这个脚本的话还是使用这位大佬的更好，我的只是应付作业来的（
+
 ## 3.网络结构
+
 非常经典的卷积池化三层结构
 
 - (1) 三层卷积 + 池化
@@ -20,18 +25,29 @@ https://github.com/langningchen/luoguCaptcha/tree/main/data
 - (3) 四路输出头
   
 Input: (B, 3, 35, 90)
+
   └─ Conv(3→32, 3×3, pad1) → ReLU → MaxPool(2×2)
+
        → (B, 32, 17, 45)
+
   └─ Conv(32→64, 3×3, pad1) → ReLU → MaxPool(2×2)
+
        → (B, 64, 8, 22)
+
   └─ Conv(64→128,3×3, pad1) → ReLU → MaxPool(2×2)
+
        → (B,128,4,11)
+
   └─ Flatten → (B, 128×4×11=5632)
+
   └─ FC(5632→512) → ReLU
   
   └─> head0 (512→NUM_CLASSES) → out0
+
      └─> head1 (512→NUM_CLASSES) → out1
+
      └─> head2 (512→NUM_CLASSES) → out2
+
      └─> head3 (512→NUM_CLASSES) → out3
 
 Return: (out0, out1, out2, out3)
