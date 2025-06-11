@@ -13,7 +13,7 @@
 
 
 (() => {
-  const server = 'http://localhost:3636';
+  const server = 'http://8.130.187.204:3636';
 
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');

@@ -9,7 +9,7 @@ transform = transforms.Compose([
     transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
 ])
 CHARSET = string.digits + string.ascii_lowercase
-device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+device = 'cpu'
 idx2char = {i: c for i, c in enumerate(CHARSET)}
 modelpath = '8302.pth'
 
