@@ -14,6 +14,12 @@
 
 非常感谢大佬的数据集，当我在一片茫茫大海中到处寻找数据集的时候，他仓库的出现仿佛黑暗中的一道光
 
+## 使用
+
+1. 将user.js安装到 [TamperMonkey](https://www.tampermonkey.net/) 
+2. 在本地运行 [app.py](./app.py)。什么？服务器？以后再说...
+3. 现在打开洛谷如果提交时弹出验证码就会自动填充了
+   
 ## 网络结构
 
 非常经典的卷积池化三层结构
@@ -42,9 +48,3 @@
 
 ![alt text](plt/loss.png)
 ![alt text](plt/acc.png)
-
-## 使用
-
-1. 将user.js安装到 [TamperMonkey](https://www.tampermonkey.net/) 
-2. 在本地运行 [app.py](./app.py)。什么？服务器？以后再说...
-3. 现在打开洛谷如果提交时弹出验证码就会自动填充了
