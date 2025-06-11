@@ -1,16 +1,19 @@
 // ==UserScript==
 // @name         automatic captcha recognition for luogu
 // @namespace    https://github.com/mayoi-Akira
-// @version      v0.0.1
+// @version      0.0.1
 // @description  使用卷积神经网络训练的验证码识别模型，自动识别填写洛谷提交时的验证码
 // @match        *://www.luogu.com.cn/*
 // @icon         https://www.luogu.com.cn/favicon.ico
 // @grant        GM_xmlhttpRequest
+// @author       Akira
+// @downloadURL  https://github.com/mayoi-Akira/CNN-captcha-recognition-for-Luogu/blob/main/user.js
+// @updateURL    https://github.com/mayoi-Akira/CNN-captcha-recognition-for-Luogu/blob/main/user.js
 // ==/UserScript==
 
 
 (() => {
-  const server = 'http://localhost:5000';
+  const server = 'http://localhost:3636';
 
   const canvas = document.createElement('canvas');
   const ctx = canvas.getContext('2d');
