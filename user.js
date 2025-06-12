@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         automatic captcha recognition for luogu
+// @name         洛谷验证码自动识别并填写
 // @namespace    https://github.com/mayoi-Akira
-// @version      0.0.1
+// @version      0.1.0
 // @description  使用卷积神经网络训练的验证码识别模型，自动识别填写洛谷提交时的验证码
 // @match        *://www.luogu.com.cn/*
 // @icon         https://www.luogu.com.cn/favicon.ico
