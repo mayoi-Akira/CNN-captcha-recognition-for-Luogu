@@ -15,13 +15,19 @@
 
 ## 使用
 
-1. 首先，确保你有 [TamperMonkey](https://www.tampermonkey.net/) 插件。
-2. 下载本仓库的 [user.js](./user.js) 。
-3. 在浏览器的右上角找到扩展——篡改猴——添加脚本。
-4. 删除原有内容，将user.js拖到网页的编辑器中。
-5. ctrl + s 保存。
-6. ~~在本地运行 [app.py](./app.py)。什么？服务器？以后再说...~~
+- 首先，确保你有 [TamperMonkey](https://www.tampermonkey.net/) 插件。
+  
+- 方法一：
+1. 下载本仓库的 [user.js](./user.js) 。
+2. 在浏览器的右上角找到扩展——篡改猴——添加脚本。
+3. 删除原有内容，将user.js拖到网页的编辑器中。
+4. ctrl + s 保存。
+5. ~~在本地运行 [app.py](./app.py)。什么？服务器？以后再说...~~
    (已经不需要这一步啦)
+   
+- 方法二：
+  
+  直接去 [Greasy Fork](https://greasyfork.org/zh-CN/scripts/539208-%E6%B4%9B%E8%B0%B7%E9%AA%8C%E8%AF%81%E7%A0%81%E8%87%AA%E5%8A%A8%E8%AF%86%E5%88%AB%E5%B9%B6%E5%A1%AB%E5%86%99) 安装该脚本
 
 
 ## 具体内容
