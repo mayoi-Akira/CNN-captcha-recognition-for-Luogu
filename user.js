@@ -7,6 +7,7 @@
 // @icon         https://www.luogu.com.cn/favicon.ico
 // @grant        GM_xmlhttpRequest
 // @author       Akira
+// @license      MIT
 // @downloadURL  https://github.com/mayoi-Akira/CNN-captcha-recognition-for-Luogu/blob/main/user.js
 // @updateURL    https://github.com/mayoi-Akira/CNN-captcha-recognition-for-Luogu/blob/main/user.js
 // ==/UserScript==
