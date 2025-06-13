@@ -7,7 +7,7 @@ CHARSET = string.digits + string.ascii_lowercase
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 idx2char = {i: c for i, c in enumerate(CHARSET)}
 
-modelpath = 'ResNet95.pth'
+modelpath = 'ResNet/ResNet95.pth'
 import torchvision.models as models
 
 from torchvision import transforms
