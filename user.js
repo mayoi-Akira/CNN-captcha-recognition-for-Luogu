@@ -12,62 +12,67 @@
 // @updateURL    https://github.com/mayoi-Akira/CNN-captcha-recognition-for-Luogu/blob/main/user.js
 // ==/UserScript==
 
-
 (() => {
-  const server = 'http://8.130.187.204:3636';
+  const server = "http://8.130.64.15:3636";
 
-  const canvas = document.createElement('canvas');
-  const ctx = canvas.getContext('2d');
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
 
   function recognize(img, callback) {
     canvas.width = img.naturalWidth;
     canvas.height = img.naturalHeight;
     ctx.drawImage(img, 0, 0);
-    const data = canvas.toDataURL('image/jpeg').split(',')[1];
+    const data = canvas.toDataURL("image/jpeg").split(",")[1];
 
     GM_xmlhttpRequest({
-      method: 'POST',
+      method: "POST",
       url: server,
-      headers: { 'Content-Type': 'application/json' },
+      headers: { "Content-Type": "application/json" },
       data: JSON.stringify({ image: data }),
-      onload: resp => {
+      onload: (resp) => {
         try {
           const { prediction } = JSON.parse(resp.responseText);
           callback(prediction);
         } catch (e) {
-          console.error('OCR 获取失败', e);
-          callback('');
+          console.error("OCR 获取失败", e);
+          callback("");
         }
       },
-      onerror: err => {
-        console.error('OCR 请求失败', err);
-        callback('');
+      onerror: (err) => {
+        console.error("OCR 请求失败", err);
+        callback("");
       },
-      timeout: 5000
+      timeout: 5000,
     });
   }
 
-  const observer = new MutationObserver(mutations => {
+  const observer = new MutationObserver((mutations) => {
     for (const m of mutations) {
       let img = null;
-      if (m.type === 'childList') {
-        img = [...m.addedNodes].find(n => n.nodeName === 'IMG' && n.src.includes('captcha'));
-      } else if (m.type === 'attributes' && m.target.nodeName === 'IMG' && m.target.src.includes('captcha')) {
+      if (m.type === "childList") {
+        img = [...m.addedNodes].find(
+          (n) => n.nodeName === "IMG" && n.src.includes("captcha")
+        );
+      } else if (
+        m.type === "attributes" &&
+        m.target.nodeName === "IMG" &&
+        m.target.src.includes("captcha")
+      ) {
         img = m.target;
       }
       if (!img) continue;
 
       const input = document.querySelector('input[placeholder*="验证码"]');
       if (!input) {
-        console.warn('未找到输入框');
+        console.warn("未找到输入框");
         continue;
       }
 
       const run = () => {
-        recognize(img, text => {
+        recognize(img, (text) => {
           input.value = text;
-          input.dispatchEvent(new Event('input', { bubbles: true }));
-          input.dispatchEvent(new Event('change', { bubbles: true }));
+          input.dispatchEvent(new Event("input", { bubbles: true }));
+          input.dispatchEvent(new Event("change", { bubbles: true }));
         });
       };
 
@@ -78,6 +83,6 @@
       }
     }
   });
-  const root = document.querySelector('#captcha-container') || document.body;
+  const root = document.querySelector("#captcha-container") || document.body;
   observer.observe(root, { childList: true, subtree: true, attributes: true });
 })();

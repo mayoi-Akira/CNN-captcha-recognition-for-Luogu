@@ -5,8 +5,7 @@ import torch
 from PIL import Image
 
 app = Flask(__name__)
-from model_load import load, transform, idx2char, device
-import torch
+
 
 model = load()
 

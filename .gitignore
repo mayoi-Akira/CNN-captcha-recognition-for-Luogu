@@ -2,3 +2,5 @@ tmp.*
 ./*.png
 *.pdf
 __pycache__
+.vscode
+.cph
