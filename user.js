@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         洛谷验证码自动识别并填写
 // @namespace    https://github.com/mayoi-Akira
-// @version      0.1.0
+// @version      0.2.0
 // @description  使用卷积神经网络训练的验证码识别模型，自动识别填写洛谷提交时的验证码
 // @match        *://www.luogu.com.cn/*
 // @icon         https://www.luogu.com.cn/favicon.ico
@@ -46,43 +46,54 @@
     });
   }
 
+  const handleImage = (img) => {
+    const input = document.querySelector('input[placeholder*="验证码"]');
+    if (!input) {
+      console.warn("未找到输入框");
+      return;
+    }
+
+    const run = () => {
+      recognize(img, (text) => {
+        input.value = text;
+        input.dispatchEvent(new Event("input", { bubbles: true }));
+        input.dispatchEvent(new Event("change", { bubbles: true }));
+      });
+    };
+
+    if (img.complete) {
+      run();
+    } else {
+      img.onload = run;
+    }
+  };
+
   const observer = new MutationObserver((mutations) => {
     for (const m of mutations) {
-      let img = null;
       if (m.type === "childList") {
-        img = [...m.addedNodes].find(
-          (n) => n.nodeName === "IMG" && n.src.includes("captcha")
-        );
+        m.addedNodes.forEach((node) => {
+          if (node.nodeType === Node.ELEMENT_NODE) {
+            if (node.nodeName === "IMG" && node.src.includes("captcha")) {
+              handleImage(node);
+            }
+            const imgs = node.querySelectorAll('img[src*="captcha"]');
+            imgs.forEach(handleImage);
+          }
+        });
       } else if (
         m.type === "attributes" &&
         m.target.nodeName === "IMG" &&
         m.target.src.includes("captcha")
       ) {
-        img = m.target;
-      }
-      if (!img) continue;
-
-      const input = document.querySelector('input[placeholder*="验证码"]');
-      if (!input) {
-        console.warn("未找到输入框");
-        continue;
-      }
-
-      const run = () => {
-        recognize(img, (text) => {
-          input.value = text;
-          input.dispatchEvent(new Event("input", { bubbles: true }));
-          input.dispatchEvent(new Event("change", { bubbles: true }));
-        });
-      };
-
-      if (img.complete) {
-        run();
-      } else {
-        img.onload = run;
+        handleImage(m.target);
       }
     }
   });
   const root = document.querySelector("#captcha-container") || document.body;
   observer.observe(root, { childList: true, subtree: true, attributes: true });
+
+  const existingImg = document.querySelector('img[src*="captcha"]');
+  if (existingImg) {
+    handleImage(existingImg);
+  }
 })();
